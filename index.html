@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ModelGo � 3D ������ � ������</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <i class="fas fa-cube"></i>
+        <span>Model<span class="accent">Go</span></span>
+      </a>
+      <div class="nav-toggle" id="navToggle">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero" class="nav-link active">�������</a></li>
+
+        
+
+        <li><a href="#products" class="nav-link">������</a></li>
+        <li><a href="#calculator" class="nav-link">�����������</a></li>
+        <li><a href="#pricing" class="nav-link">����</a></li>
+
+        <li id="userInfo" style="display:none">
+            <span style="color:var(--text-secondary);font-size:0.9rem;padding:8px 12px">������, <span id="userName"></span> | <a href="#" onclick="logout()" style="color:var(--accent)">�����</a></span>
+          </li>
+          <li>
+          <a href="#cart" class="nav-link cart-link" id="cartLink">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge" id="cartBadge">0</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>3D ������ <span class="accent">�������� ��������</span></h1>
+
+        <div class="hero-buttons">
+
+          
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="cube-3d">
+          <div class="cube-face front"></div>
+          <div class="cube-face back"></div>
+          <div class="cube-face right"></div>
+          <div class="cube-face left"></div>
+          <div class="cube-face top"></div>
+          <div class="cube-face bottom"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="pricing section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">����</span>
+        <h2>��������� �����</h2>
+        <p>���������� ���� ��� ������� ��������</p>
+      </div>
+      <div class="pricing-grid">
+                <div class="price-card">
+          <div class="price-card-header">
+            <span class="price-label">Технология</span>
+            <h3>FDM (пластик)</h3>
+            <div class="price"><span class="price-value">3</span> ₽/г</div>
+          </div>
+          <ul class="price-features">
+            <li><span class="feature-label">Материал</span> — PLA, PETG</li>
+            <li><i class="fas fa-check"></i> Слой 0.05–0.3 мм</li>
+          </ul>
+        </div>
+            </div>
+    </div>
+  </section>  <section id="calculator" class="calculator section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">�����������</span>
+        <h2>����������� ��������� ������</h2>
+        <p>���� FDM ������: 3 ?/�</p>
+      </div>
+      <div class="calc-container">
+        <div class="calc-form">
+          <div class="form-group">
+            <label for="calcTech">����������</label>
+            <select id="calcTech">
+              <option value="fdm">FDM (�������)</option>
+              <option value="sla">SLA (�����������)</option>
+              <option value="sls">SLS (������)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="calcMaterial">��������</label>
+            <select id="calcMaterial">
+              <option value="pla">PLA</option>
+              <option value="petg">PETG</option>
+              
+              
+              
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="calcWeight">��� ������ (�)</label>
+              <input type="number" id="calcWeight" value="50" min="1" max="5000">
+            </div>
+            <div class="form-group">
+              <label for="calcQuantity">����������</label>
+              <input type="number" id="calcQuantity" value="1" min="1" max="1000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>��������� ������</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="complexity" value="simple" checked>
+                <span>�������</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="complexity" value="medium">
+                <span>�������</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="complexity" value="complex">
+                <span>�������</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="calcPostProcessing">
+              ������������� (�������� + ��������)
+            </label>
+          </div>
+          <button class="btn btn-primary btn-calc" id="calcBtn">����������</button>
+        </div>
+        <div class="calc-result" id="calcResult">
+          <div class="calc-result-placeholder">
+            <i class="fas fa-calculator"></i>
+            <p>��������� ��������� � ������� "����������"</p>
+          </div>
+          <div class="calc-result-content" id="calcResultContent" style="display:none;">
+            <h3>��������� ������</h3>
+            <div class="calc-breakdown">
+              <div class="calc-row"><span>������</span><span id="calcPrintCost">0 ?</span></div>
+              <div class="calc-row"><span>��������</span><span id="calcMatCost">0 ?</span></div>
+              <div class="calc-row" id="calcPostRow" style="display:none;"><span>�������������</span><span id="calcPostCost">0 ?</span></div>
+              <div class="calc-row calc-divider"></div>
+              <div class="calc-row calc-total"><span>�����</span><span id="calcTotalCost">0 ?</span></div>
+            </div>
+            <button class="btn btn-primary" id="calcAddToCart">�������� � �������</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cart" class="cart-section section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">�������</span>
+        <h2>��� �����</h2>
+        <p>��������� � �������� �����</p>
+      </div>
+      <div class="cart-content" id="cartContent">
+        <div class="cart-empty">
+          <i class="fas fa-shopping-cart"></i>
+          <p>������� �����</p>
+          <a href="#products" class="btn btn-primary">������� � �������</a>
+        </div>
+        <div class="cart-items" id="cartItems" style="display:none;">
+          <div class="cart-list" id="cartList"></div>
+          <div class="cart-summary">
+            <div class="cart-total-row">
+              <span>�����:</span>
+              <span id="cartTotal">0 ?</span>
+            </div>
+            <button class="btn btn-primary" id="checkoutBtn">�������� �����</button>
+            <button class="btn btn-outline" id="clearCartBtn">�������� �������</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section id="products" class="products section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">������</span>
+        <h2>���� �������</h2>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+    <section id="contacts" class="contacts section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">��������</span>
+        <h2>��������� � ����</h2>
+        <p>������� �� ������� � ������� � �������</p>
+      </div>
+      <div class="contacts-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h4>����� ������</h4>
+              <p>����: 17 � 21:00<br>��: 13:00 � 22:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label>���� ���</label>
+          </div>
+          <div class="form-group">
+            <span class="contact-static">t03806069@gmail.com</span>
+          </div>
+          <div class="form-group">
+            <span class="contact-static">+7 969 792 63 86</span>
+          </div>
+          <div class="form-group">
+            <span class="contact-static">������� �� ������� � ���.</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <i class="fas fa-cube"></i>
+          <span>Model<span class="accent">Go</span></span>
+        </a>
+        <p>���������������� 3D ������ � ������. �����������, ������, ������.</p>
+      </div>
+      <div class="footer-links">
+        <h4>���������</h4>
+        <ul>
+          
+          
+          
+          <li><a href="#products">������</a></li>
+          <li><a href="#calculator">�����������</a></li>
+          <li><a href="#pricing">����</a></li>
+        </ul>
+      </div>
+      
+
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 ModelGo. ��� ����� ��������.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cart-notification" id="cartNotification">
+    <i class="fas fa-check-circle"></i>
+    <span>����� �������� � �������</span>
+  </div>
+
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-body">
+        <i class="fas fa-check-circle modal-icon"></i>
+        <h2>����� ��������!</h2>
+        <p>�� �������� � ���� � ��������� ����� ��� ������������� ������.</p>
+        <button class="btn btn-primary modal-btn">������</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/script.js"></script>
+<div class="modal" id="authModal">
+    <div class="modal-content" style="max-width:380px">
+      <div class="modal-body">
+        <i class="fas fa-user-circle modal-icon" style="font-size:3rem;color:var(--accent)"></i>
+        <h2>����� ����������</h2>
+        <p style="margin-bottom:20px">������� ���� ��� ��� ����� �� ����</p>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <input type="text" id="authName" placeholder="���� ���" style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg-primary);color:var(--text-primary);font-size:1rem;font-family:inherit;outline:none">
+          <label style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:0.9rem;cursor:pointer">
+            <input type="checkbox" id="authRemember" checked style="accent-color:var(--accent)"> ��������� ����
+          </label>
+          <button class="btn btn-primary" id="authBtn" style="width:100%;justify-content:center">�����</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
